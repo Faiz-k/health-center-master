@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  #myCanvas {
+    background-color: #f0f0f0;
+  }
+</style>
+</head>
+<body>
+  <canvas id="myCanvas" width="494" height="700"></canvas>
+  <button id="downloadButton">Download Image</button>
+  <script>
+
+// Get the canvas element and its 2d drawing context
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // Load the background image
+    var backgroundImage = new Image();
+    backgroundImage.src = "report.jpg"; // Replace with your image URL
+    backgroundImage.onload = function() {
+      ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+      const savedFormDataJSON = localStorage.getItem('formData');
+      const savedFormData = JSON.parse(savedFormDataJSON);
+      console.log(savedFormDataJSON)
+      // Retrieve data from local storage
+      var text1 = savedFormData.name || "Default Text 1";
+      var text2 = savedFormData.age || "Default Text 2";
+      var text3 = savedFormData.gender || "Default Text 3";
+      var text4 = savedFormData.skinDisease || "Default Text 4";
+      var text5 = savedFormData.diseaseName || "Default Text 5";
+      var text6 = savedFormData.allergies || "Default Text 6";
+      var text7 = savedFormData.allergies || "";
+      
+      console.log(text1)
+      // Define text properties
+      ctx.font = "13px Arial";
+      ctx.fillStyle = "black";
+      ctx.textAlign = "center";
+
+      // First text
+      var x1 = canvas.width / 2;
+      var y1 = 236; // Adjust the Y position as needed
+      ctx.fillText(text1, x1, y1);
+
+      // Second text
+      var x2 = canvas.width / 2;
+      var y2 = 265; // Adjust the Y position as needed
+      ctx.fillText(text2, x2, y2);
+
+      // Third text
+      var x3 = canvas.width / 2;
+      var y3 = 295; // Adjust the Y position as needed
+      ctx.fillText(text3, x3, y3);
+
+      // Fourth text
+      var x4 = canvas.width / 2;
+      var y4 = 323; // Adjust the Y position as needed
+      ctx.fillText(text4, x4, y4);
+
+      // Fifth text
+      var x5 = canvas.width / 2;
+      var y5 = 374; // Adjust the Y position as needed
+      ctx.fillText(text5, x5, y5);
+
+      // Sixth text
+      var x6 = canvas.width / 2 + 13;
+      var y6 = 403; // Adjust the Y position as needed
+      ctx.fillText(text6, x6, y6);
+    };
+  
+
+    // Add a click event to the download button
+    var downloadButton = document.getElementById("downloadButton");
+    downloadButton.addEventListener("click", function() {
+      // Create a data URL from the canvas
+      var dataURL = canvas.toDataURL("image/png");
+
+      // Create a download link
+      var a = document.createElement("a");
+      a.href = dataURL;
+      a.download = "canvas_image.png";
+
+      // Trigger a click event on the download link to initiate the download
+      a.click();
+    });
+  </script>
+</body>
+</html>
